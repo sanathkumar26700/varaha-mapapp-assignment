@@ -35,7 +35,7 @@ const MarkerLayer: React.FC = () => {
         const isSelected = selectedMarker?.id === m.id;
         
         const baseColor = isSelected ? 'bg-emerald-500' : 'bg-blue-500';
-        el.className = `w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500`;
+        el.className = `mapboxgl-marker absolute w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500`;
         
         const popupHTML = `
           <div class="p-1 min-w-[140px] text-gray-800">
@@ -82,7 +82,7 @@ const MarkerLayer: React.FC = () => {
         const el = marker.getElement();
         const isSelected = selectedMarker?.id === m.id;
         const baseColor = isSelected ? 'bg-emerald-500' : 'bg-blue-500';
-        el.className = `w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500`;
+        el.className = `mapboxgl-marker absolute w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500`;
         
         if (isSelected && !marker.getPopup()?.isOpen()) {
           marker.togglePopup();
