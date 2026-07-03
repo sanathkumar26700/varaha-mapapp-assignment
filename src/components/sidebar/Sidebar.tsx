@@ -2,6 +2,7 @@ import React from 'react';
 import { useMarkers } from '@/hooks/useMarkers';
 import MarkerList from './MarkerList';
 import PolygonControls from './PolygonControls';
+import ExportControls from './ExportControls';
 
 const Sidebar: React.FC = () => {
   const { markers, clearMarkers } = useMarkers();
@@ -39,6 +40,9 @@ const Sidebar: React.FC = () => {
 
         {/* Polygon Section */}
         <PolygonControls />
+
+        {/* Export Section */}
+        <ExportControls />
       </div>
     </aside>
   );
