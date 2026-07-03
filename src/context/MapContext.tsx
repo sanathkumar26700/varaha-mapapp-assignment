@@ -44,29 +44,29 @@ export const MapProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   }, [polygon]);
 
+  const contextValue = React.useMemo(() => ({
+    map,
+    setMap,
+    markers,
+    setMarkers,
+    polygon,
+    setPolygon,
+    drawingMode,
+    setDrawingMode,
+    selectedMarker,
+    setSelectedMarker,
+    zoom,
+    setZoom,
+    center,
+    setCenter,
+    loading,
+    setLoading,
+    temporaryVertices,
+    setTemporaryVertices
+  }), [map, markers, polygon, drawingMode, selectedMarker, zoom, center, loading, temporaryVertices]);
+
   return (
-    <MapContext.Provider
-      value={{
-        map,
-        setMap,
-        markers,
-        setMarkers,
-        polygon,
-        setPolygon,
-        drawingMode,
-        setDrawingMode,
-        selectedMarker,
-        setSelectedMarker,
-        zoom,
-        setZoom,
-        center,
-        setCenter,
-        loading,
-        setLoading,
-        temporaryVertices,
-        setTemporaryVertices,
-      }}
-    >
+    <MapContext.Provider value={contextValue}>
       {children}
     </MapContext.Provider>
   );
