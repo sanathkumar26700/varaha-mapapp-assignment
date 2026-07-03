@@ -35,7 +35,10 @@ const MarkerLayer: React.FC = () => {
         const isSelected = selectedMarker?.id === m.id;
         
         const baseColor = isSelected ? 'bg-emerald-500' : 'bg-blue-500';
-        el.className = `mapboxgl-marker absolute w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500`;
+        el.className = `mapboxgl-marker absolute w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500 focus:outline-none focus:ring-4 focus:ring-blue-300`;
+        el.tabIndex = 0;
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', `Marker at latitude ${m.latitude.toFixed(4)} and longitude ${m.longitude.toFixed(4)}`);
         
         const popupHTML = `
           <div class="p-1 min-w-[140px] text-gray-800">
@@ -60,6 +63,13 @@ const MarkerLayer: React.FC = () => {
           selectMarker(m);
         });
 
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectMarker(m);
+          }
+        });
+
         popup.on('close', () => {
           // If we close the popup and it was selected, clear selection
           // setTimeout prevents React warnings about updating state during render of other components
@@ -82,7 +92,7 @@ const MarkerLayer: React.FC = () => {
         const el = marker.getElement();
         const isSelected = selectedMarker?.id === m.id;
         const baseColor = isSelected ? 'bg-emerald-500' : 'bg-blue-500';
-        el.className = `mapboxgl-marker absolute w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500`;
+        el.className = `mapboxgl-marker absolute w-5 h-5 rounded-full border-2 border-white shadow-md cursor-pointer transition-colors ${baseColor} hover:bg-orange-500 focus:outline-none focus:ring-4 focus:ring-blue-300`;
         
         if (isSelected && !marker.getPopup()?.isOpen()) {
           marker.togglePopup();
