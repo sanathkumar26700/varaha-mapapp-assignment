@@ -1,10 +1,21 @@
 import React from 'react';
+import { MapProvider } from '@/context/MapContext';
+import MapView from '@/components/map/MapView';
+import Sidebar from '@/components/sidebar/Sidebar';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const App: React.FC = () => {
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-100 text-gray-800">
-      <h1 className="text-3xl font-bold">Interactive Map Application</h1>
-    </div>
+    <MapProvider>
+      <div className="flex h-screen w-screen flex-col overflow-hidden bg-gray-50">
+        <main className="flex flex-1 overflow-hidden w-full">
+          <Sidebar />
+          <section className="flex-1 relative">
+            <MapView />
+          </section>
+        </main>
+      </div>
+    </MapProvider>
   );
 };
 
