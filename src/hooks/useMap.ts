@@ -30,6 +30,11 @@ export function useMap() {
     });
 
     mapInstance.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+    mapInstance.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+    mapInstance.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true
+    }), 'top-right');
     mapInstance.addControl(new mapboxgl.ScaleControl(), 'bottom-right');
 
     mapInstance.on('load', () => {
@@ -43,7 +48,7 @@ export function useMap() {
       mapInstance.remove();
       setMap(null);
     };
-  }, [setMap]);
+  }, [setMap, error]);
 
   return { containerRef, isLoaded, error };
 }
